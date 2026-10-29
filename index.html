@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#130f1d">
+<title>Дело № 10 — Сердце на расстоянии</title>
+<style>
+:root{--bg:#100d18;--panel:#1b1527;--panel2:#241b32;--gold:#f2c879;--pink:#ff8eae;--text:#fff6f3;--muted:#c5b7cc;--line:#49364f;--good:#8ee0b0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#44213c 0,transparent 42%),radial-gradient(ellipse at 100% 25%,#202b4b 0,transparent 38%),var(--bg);color:var(--text);font-family:Georgia,'Times New Roman',serif;min-height:100vh}
+button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{width:min(760px,100%);margin:auto;padding:22px 16px 54px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--muted);font:12px/1.4 system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase}.seal{border:1px solid #725b70;border-radius:99px;padding:7px 10px;color:var(--gold);white-space:nowrap}
+.hero{text-align:center;padding:50px 8px 26px}.eyebrow{font:12px system-ui,sans-serif;color:var(--gold);letter-spacing:.24em;text-transform:uppercase}.heart{font-size:45px;display:block;margin:16px auto;filter:drop-shadow(0 0 18px #ff6d9a66);animation:float 3s ease-in-out infinite}@keyframes float{50%{transform:translateY(-7px)}}h1{font-size:clamp(34px,8vw,58px);font-weight:normal;line-height:1.02;margin:10px 0 15px}h1 em{color:var(--pink);font-style:normal}.subtitle{font-size:17px;line-height:1.7;color:var(--muted);max-width:560px;margin:0 auto}.filecard{margin:20px 0 22px;background:#ffffff08;border:1px solid var(--line);border-radius:16px;padding:16px 18px;text-align:left}.filehead{display:flex;justify-content:space-between;gap:10px;font:12px system-ui,sans-serif;color:var(--gold);letter-spacing:.12em;text-transform:uppercase}.filecard p{line-height:1.65;margin:10px 0 0;color:#e8dce9}.progress{height:5px;background:#34273b;border-radius:9px;overflow:hidden;margin:18px 0 8px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--gold));transition:width .35s}.progresslabel{display:flex;justify-content:space-between;font:12px system-ui,sans-serif;color:var(--muted)}
+.panel{background:linear-gradient(150deg,#21192eeb,#171321f2);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,30px);box-shadow:0 20px 60px #0003;margin-top:18px}.stagehead{display:flex;gap:13px;align-items:center;margin-bottom:18px}.num{width:42px;height:42px;flex:none;display:grid;place-items:center;border:1px solid #8c657f;border-radius:50%;color:var(--gold);font:14px system-ui,sans-serif}.stagehead small{font:11px system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--pink)}h2{font-size:25px;font-weight:normal;margin:3px 0 0}.prompt{font-size:17px;line-height:1.75;color:#f0e6f1;margin:12px 0 20px}.btn{border:1px solid #79556f;background:linear-gradient(120deg,#5b2d50,#3d2a4c);color:white;border-radius:12px;padding:12px 17px;transition:transform .15s,border-color .15s}.btn:hover{transform:translateY(-1px);border-color:var(--pink)}.btn.primary{background:linear-gradient(120deg,#b44e79,#8b527d);border-color:#d989a8}.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.feedback{min-height:25px;color:var(--gold);font:14px/1.5 system-ui,sans-serif;margin-top:13px}.hint{margin-top:15px;border:1px dashed #6d526e;border-radius:11px;padding:12px 14px;color:var(--muted);font:14px/1.6 system-ui,sans-serif;display:none}.hint.show{display:block}.hidden{display:none!important}
+.clues{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.clue{min-height:94px;border:1px solid #5b455f;border-radius:14px;background:#ffffff06;color:var(--text);padding:12px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}.clue span{font-size:24px}.clue small{font:12px system-ui,sans-serif;color:var(--muted)}.clue.found{border-color:var(--good);background:#8ee0b012}.clue.found small{color:var(--good)}
+input[type=text]{width:100%;background:#100d18;border:1px solid #6d526e;border-radius:12px;padding:14px;color:white;font-size:17px;letter-spacing:.06em}.cipher{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px;margin:18px 0}.cipher button{padding:12px 2px;border:1px solid #634965;border-radius:10px;background:#ffffff08;color:#fff;font-size:20px}.cipher button.picked{background:#794262;border-color:var(--pink);transform:translateY(-2px)}.decodebox{padding:14px;border-radius:12px;background:#100d18;border:1px dashed #6d526e;min-height:53px;color:var(--gold);letter-spacing:.1em;font-size:19px;word-break:break-word}
+.gridgame{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:18px 0}.tile{aspect-ratio:1;border:1px solid #654c6b;border-radius:12px;background:#ffffff07;color:var(--text);font-size:clamp(20px,5vw,29px);display:grid;place-items:center}.tile.open{background:#4a304b;border-color:var(--pink)}.tile.matched{background:#1e4a3c;border-color:var(--good);color:var(--good)}
+.route{display:grid;grid-template-columns:1fr 30px 1fr;align-items:center;gap:8px;margin:20px 0}.city{padding:17px 9px;text-align:center;border:1px solid #6c536f;border-radius:14px;background:#ffffff07}.city strong{display:block;font-size:19px;font-weight:normal}.city small{font:12px system-ui,sans-serif;color:var(--muted)}.route .line{height:1px;background:linear-gradient(90deg,var(--pink),var(--gold));position:relative}.route .line:after{content:"♥";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--panel);padding:2px 5px;color:var(--pink)}
+.choicegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.choice{min-height:66px;text-align:left;padding:13px;border:1px solid #634965;background:#ffffff06;color:var(--text);border-radius:12px;line-height:1.4}.choice.selected{border-color:var(--pink);background:#8b456022}.choice.correct{border-color:var(--good);background:#8ee0b014}
+.letter{font-size:17px;line-height:1.95;color:#f5e9f1}.letter .signature{color:var(--gold);font-size:22px;margin-top:22px}.letterbox{border:1px solid #6e4d69;background:linear-gradient(140deg,#2c1b30,#1b192a);padding:clamp(18px,5vw,30px);border-radius:17px;position:relative}.letterbox:before{content:"ЛИЧНОЕ. ТОЛЬКО ДЛЯ ТЕБЯ";display:block;font:10px system-ui,sans-serif;letter-spacing:.2em;color:var(--pink);margin-bottom:18px}.footer{text-align:center;color:#8d7d95;font:12px/1.7 system-ui,sans-serif;margin:30px 0 0}.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#2b1d34;border:1px solid #79556f;border-radius:12px;padding:12px 16px;max-width:calc(100% - 28px);font:14px system-ui,sans-serif;box-shadow:0 10px 40px #0006;z-index:9}
+@media(max-width:440px){.wrap{padding:16px 12px 36px}.hero{padding-top:38px}.clues{gap:7px}.clue{min-height:88px}.choicegrid{grid-template-columns:1fr}.cipher{gap:5px}.cipher button{font-size:18px}.top{font-size:10px}.seal{padding:6px 8px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span>Архив особых дел</span><span class="seal">ДОСТУП: ТОЛЬКО НАДЕ</span></div>
+  <header class="hero">
+    <div class="eyebrow">секретное расследование</div>
+    <span class="heart">♥</span>
+    <h1>Дело № 10:<br><em>Сердце на расстоянии</em></h1>
+    <p class="subtitle">В архиве обнаружено послание, которое нельзя открыть обычным ключом. Чтобы добраться до него, нужно раскрыть четыре улики. Главная подозреваемая — девушка, которую очень любят.</p>
+  </header>
+  <div class="filecard">
+    <div class="filehead"><span>Материалы дела</span><span>Тбилиси ↔ Минск</span></div>
+    <p>Следователь оставил несколько испытаний. Не торопись: некоторые ответы спрятаны не в кнопках, а в самой истории. Если застрянешь, можешь открыть подсказку — но сначала попробуй сама.</p>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="progresslabel"><span id="progressText">Дело не раскрыто</span><span id="progressCount">0 / 4 улик</span></div>
+  </div>
+
+  <section class="panel" id="stage1">
+    <div class="stagehead"><div class="num">01</div><div><small>Улика первая</small><h2>Что скрывает архив?</h2></div></div>
+    <p class="prompt">В архиве три документа. Только один отмечен следователем. Найди его — и получишь первую часть доступа.</p>
+    <div class="clues">
+      <button class="clue" data-clue="0" aria-label="Документ А"><span>🗝️</span><small>Документ А</small></button>
+      <button class="clue" data-clue="1" aria-label="Документ Б"><span>📜</span><small>Документ Б</small></button>
+      <button class="clue" data-clue="2" aria-label="Документ В"><span>🌙</span><small>Документ В</small></button>
+    </div>
+    <div class="feedback" id="f1" aria-live="polite"></div>
+    <div class="hint" id="h1">Подсказка: следователь оставил знак, который чаще всего появляется, когда город уже спит, а кто-то всё ещё ждёт сообщения.</div>
+    <div class="actions"><button class="btn" data-hint="1">Нужна подсказка</button></div>
+  </section>
+
+  <section class="panel hidden" id="stage2">
+    <div class="stagehead"><div class="num">02</div><div><small>Улика вторая</small><h2>Перехваченное сообщение</h2></div></div>
+    <p class="prompt">Сообщение перехватили и перемешали его буквы. Собери из них слово, которое описывает то, что может преодолеть расстояние между двумя городами. Используй каждую букву один раз.</p>
+    <div class="cipher" id="cipher"></div>
+    <div class="decodebox" id="decode" aria-live="polite">ТВОЁ СЛОВО: —</div>
+    <div class="actions"><button class="btn" id="undoCipher">Убрать последнюю букву</button><button class="btn primary" id="checkCipher">Проверить слово</button></div>
+    <div class="feedback" id="f2" aria-live="polite"></div>
+    <div class="hint" id="h2">Подсказка: это не «любовь» и не «верность». Так называют мягкое, заботливое отношение, когда хочется беречь человека.</div>
+    <div class="actions"><button class="btn" data-hint="2">Нужна подсказка</button></div>
+  </section>
+
+  <section class="panel hidden" id="stage3">
+    <div class="stagehead"><div class="num">03</div><div><small>Улика третья</small><h2>Пары совпадений</h2></div></div>
+    <p class="prompt">В записях остались восемь символов. Найди четыре пары одинаковых символов. Это проверка внимательности: открывай по две карточки за раз.</p>
+    <div class="gridgame" id="memory"></div>
+    <div class="feedback" id="f3" aria-live="polite">Совпадений: 0 / 4</div>
+    <div class="hint" id="h3">Подсказка: запоминай не только сам символ, но и его место. Если карточки не совпали, они закроются через мгновение.</div>
+    <div class="actions"><button class="btn" data-hint="3">Нужна подсказка</button></div>
+  </section>
+
+  <section class="panel hidden" id="stage4">
+    <div class="stagehead"><div class="num">04</div><div><small>Последняя улика</small><h2>Маршрут к главному ответу</h2></div></div>
+    <p class="prompt">Два города. Одно расстояние. Последний вопрос не о географии — а о том, что делает дорогу между вами короче. Выбери ответ, который, по-твоему, оставил автор дела.</p>
+    <div class="route"><div class="city"><strong>Тбилиси</strong><small>там, где он ждёт</small></div><div class="line"></div><div class="city"><strong>Минск</strong><small>там, где она улыбается</small></div></div>
+    <div class="choicegrid" id="finalChoices">
+      <button class="choice" data-answer="time">Нужно просто дождаться подходящего момента</button>
+      <button class="choice" data-answer="distance">Расстояние всё решает само</button>
+      <button class="choice" data-answer="care">Забота, честность и желание быть рядом</button>
+      <button class="choice" data-answer="luck">Нужна только удача</button>
+    </div>
+    <div class="feedback" id="f4" aria-live="polite"></div>
+    <div class="hint" id="h4">Подсказка: правильный ответ не измерить километрами и не поставить в календарь. Он проявляется в поступках.</div>
+    <div class="actions"><button class="btn" data-hint="4">Нужна подсказка</button></div>
+  </section>
+
+  <section class="panel hidden" id="ending">
+    <div class="stagehead"><div class="num">♥</div><div><small>Дело раскрыто</small><h2>Послание найдено</h2></div></div>
+    <div class="letterbox">
+      <div class="letter">
+        Малышка, если ты читаешь это, значит, ты прошла все испытания. Но самое главное в этом деле было не найти правильные ответы.<br><br>
+        Самая важная улика — то, что даже между Минском и Тбилиси есть место, где мы встречаемся каждый день: в сообщениях, в голосе, в мыслях друг о друге и в маленьких моментах, которые хочется сохранить.<br><br>
+        Я не обещаю, что расстояние всегда будет лёгким. Но я хочу, чтобы ты знала: ты для меня не просто экран телефона и не просто имя в переписке. Ты человек, которому я хочу дарить улыбки, спокойствие, заботу и настоящие объятия — не через экран, а рядом.<br><br>
+        Спасибо тебе за то, что ты есть. Пусть эта маленькая игра останется напоминанием: иногда самый красивый сюрприз — это когда кто-то старается сделать твой день чуточку счастливее.<br>
+        <div class="signature">Твой Ник ♥</div>
+      </div>
+    </div>
+    <div class="actions"><button class="btn primary" id="restart">Пройти расследование ещё раз</button><button class="btn" id="saveLetter">Скопировать письмо</button></div>
+    <div class="feedback" id="copyFeedback" aria-live="polite"></div>
+  </section>
+  <div class="footer">Составлено с теплом в Тбилиси · Для одной особенной девушки в Минске<br>Дело закрывается только объятиями.</div>
+</div>
+<div class="toast hidden" id="toast" role="status"></div>
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+  let solved = new Set();
+  function unlock(n) {
+    solved.add(n);
+    $('#bar').style.width = (solved.size/4*100)+'%';
+    $('#progressCount').textContent = `${solved.size} / 4 улик`;
+    $('#progressText').textContent = solved.size===4 ? 'Дело раскрыто' : 'Найдено улик: '+solved.size;
+    if(n<4) $('#stage'+(n+1)).classList.remove('hidden');
+    if(solved.size===4) $('#ending').classList.remove('hidden');
+  }
+  $$('[data-hint]').forEach(b=>b.addEventListener('click',()=>{
+    const h=$('#h'+b.dataset.hint); h.classList.toggle('show');
+    b.textContent=h.classList.contains('show')?'Скрыть подсказку':'Нужна подсказка';
+  }));
+  // Clue one: moon is the correct document.
+  $$('[data-clue]').forEach(b=>b.addEventListener('click',()=>{
+    if(solved.has(1)) return;
+    if(b.dataset.clue==='2') {
+      b.classList.add('found'); b.querySelector('small').textContent='Найдено!';
+      $('#f1').textContent='Верно. На документе знак ночи — первая улика найдена.';
+      unlock(1);
+    } else {
+      $('#f1').textContent='Это не та улика. Посмотри внимательнее — ищи знак, связанный с ночным ожиданием.';
+      b.animate([{transform:'translateX(0)'},{transform:'translateX(-4px)'},{transform:'translateX(4px)'},{transform:'translateX(0)'}],{duration:220});
+    }
+  }));
+  // Cipher: choose scrambled letters, target NEZHNOST (НЕЖНОСТЬ).
+  const letters=['Ь','Н','О','Ж','С','Т','Е','Н'];
+  let picked=[];
+  const cipher=$('#cipher');
+  letters.forEach((l,i)=>{const b=document.createElement('button');b.textContent=l;b.type='button';b.dataset.i=i;b.addEventListener('click',()=>{
+    if(solved.has(2)||picked.some(x=>x.i===i))return;
+    picked.push({i,l});b.classList.add('picked');renderDecode();
+  });cipher.appendChild(b);});
+  function renderDecode(){$('#decode').textContent='ТВОЁ СЛОВО: '+(picked.map(x=>x.l).join('')||'—');}
+  $('#undoCipher').addEventListener('click',()=>{if(solved.has(2)||!picked.length)return;const x=picked.pop();cipher.querySelector(`[data-i="${x.i}"]`).classList.remove('picked');renderDecode();$('#f2').textContent='';});
+  $('#checkCipher').addEventListener('click',()=>{
+    if(solved.has(2))return;
+    const answer=picked.map(x=>x.l).join('');
+    if(answer==='НЕЖНОСТЬ'){ $('#f2').textContent='Именно так. Иногда нежность — это то, что сильнее любых километров.';unlock(2);}
+    else $('#f2').textContent='Пока не получилось. Проверь порядок букв и используй каждую букву ровно один раз.';
+  });
+  // Memory matching game, shuffled deterministically on each load.
+  const symbols=['🌙','🗝️','🌹','⭐','🌹','⭐','🗝️','🌙'];
+  for(let i=symbols.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[symbols[i],symbols[j]]=[symbols[j],symbols[i]];}
+  const memory=$('#memory');let first=null,lock=false,matches=0;
+  symbols.forEach((sym,i)=>{
+    const b=document.createElement('button');b.className='tile';b.type='button';b.textContent='?';b.setAttribute('aria-label','Закрытая карточка '+(i+1));
+    b.addEventListener('click',()=>{
+      if(lock||b.classList.contains('open')||b.classList.contains('matched')||solved.has(3))return;
+      b.textContent=sym;b.classList.add('open');b.setAttribute('aria-label',sym);
+      if(!first){first={b,sym};return;}
+      if(first.sym===sym){
+        first.b.classList.remove('open');first.b.classList.add('matched');b.classList.remove('open');b.classList.add('matched');matches++;
+        $('#f3').textContent=`Совпадений: ${matches} / 4`;
+        first=null;
+        if(matches===4){$('#f3').textContent='Все пары найдены. Внимательность не подвела!';unlock(3);}
+      } else {
+        const prev=first.b;first=null;lock=true;
+        setTimeout(()=>{prev.classList.remove('open');prev.textContent='?';prev.setAttribute('aria-label','Закрытая карточка');b.classList.remove('open');b.textContent='?';b.setAttribute('aria-label','Закрытая карточка');lock=false;},750);
+      }
+    });memory.appendChild(b);
+  });
+  $$('#finalChoices .choice').forEach(b=>b.addEventListener('click',()=>{
+    if(solved.has(4))return;
+    $$('#finalChoices .choice').forEach(x=>x.classList.remove('selected','correct'));
+    b.classList.add('selected');
+    if(b.dataset.answer==='care'){b.classList.add('correct');$('#f4').textContent='Да. Километры — это карта. А близость создают поступки и забота.';unlock(4);}
+    else $('#f4').textContent='Подумай ещё. Автор ищет не магию и не дату, а то, что можно выбирать каждый день.';
+  }));
+  $('#restart').addEventListener('click',()=>location.reload());
+  $('#saveLetter').addEventListener('click',async()=>{
+    const txt=$('.letter').innerText;
+    try{await navigator.clipboard.writeText(txt);$('#copyFeedback').textContent='Письмо скопировано.';}
+    catch(e){$('#copyFeedback').textContent='Не удалось скопировать автоматически. Выдели текст письма и скопируй вручную.';}
+  });
+})();
+</script>
+</body>
+</html>
